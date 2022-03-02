@@ -55,9 +55,13 @@ public class SecondEx {
             }
             switch (key) {
                 case "CITY":
-                    System.out.println();
+                    System.out.println(dataService.getDataByCity(nextKey));
                     break;
                 case "ID":
+                    System.out.println(dataService.getDataById(nextKey));
+                    break;
+                case "NAME":
+                    System.out.println(dataService.getDataByName(nextKey));
                     break;
                 default:
                     text = FileUtils.ReadFile(key);
@@ -67,11 +71,11 @@ public class SecondEx {
                     datas = FileUtils.FormatID(datas, "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[A-Z]");
                     datas.addAll(FileUtils.ReadFields(f1, "F1", datas, ","));
                     dataService.saveOrUpdateAll(datas);
-                    System.out.println("TESST\n" +
-                            "TESST\nTESST\nTESST\nTESST\nTESST\nTESST\nTESST\nTESST\nTESST\n"
-                            + datas.get(0).getCity());
                     break;
             }
         }
+        System.out.println("########################################");
+        System.out.println("####### Program end here #############");
+        System.out.println("########################################");
     }
 }
