@@ -20,28 +20,29 @@ public class FileUtils {
     String route, text, IDF, separator, format = "";
     List<Data> datas = new ArrayList<Data>();
 
+
     public FileUtils() {
 
     }
 
     public FileUtils(String route, String text, List<Data> datas, String IDF, String separator, String format) {
-        this.route = route;
-        this.text = text;
-        this.datas = datas;
-        this.IDF = IDF;
-        this.separator = separator;
-        this.format = format;
-
+        this.route=route;
+        this.text=text;
+        this.datas=datas;
+        this.IDF=IDF;
+        this.separator=separator;
+        this.format=format;
+    
     }
 
     public String ReadFile() throws FileNotFoundException {
         String file = "";
-        Scanner input = new Scanner(new File(route));
-        while (input.hasNextLine()) {
-            String line = input.nextLine();
-            file += line + "\n";
-        }
-        input.close();
+            Scanner input = new Scanner(new File(route));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                file += line + "\n";
+            }
+            input.close();
         return file;
     }
 
@@ -78,14 +79,12 @@ public class FileUtils {
     }
 
     public static List<Data> FormatID(List<Data> datasP, String IDF) {
-        List<Data> datasR = new ArrayList<Data>();
         datasP.forEach((data) -> {
             if (data.getId().matches(IDF)) {
                 data.setId(data.getId().replace("-", ""));
-                datasR.add(data);
             }
         });
-        return datasR;
+        return datasP;
     }
 
     public static void WriteFile(String key) {
@@ -124,9 +123,7 @@ public class FileUtils {
         Map<String, String> f1 = new HashMap<String, String>();
         Map<String, String> f2 = new HashMap<String, String>();
         List<Data> datas = new ArrayList<Data>();
-        List<Data> datasf1 = new ArrayList<Data>();
-        List<Data> datasf2 = new ArrayList<Data>();
-
+        List<Data> datasaux = new ArrayList<Data>();
         String IDF = "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[A-Z]";
         if (route.equals("data.tmp")) {
             fileUtils.setRoute(route); // Set address for Tmp file
@@ -139,18 +136,16 @@ public class FileUtils {
         f1 = fileUtils.ReadBlock(); // Read in format F1
         fileUtils.setFormat("F2");
         f2 = fileUtils.ReadBlock(); // Read in format f2
-        datasf2 = FileUtils.ReadFields(f2, "F2", datasf2, " ; ");
-        datas.addAll(FileUtils.FormatID(datasf2, IDF)); // Format id for f2 // format
-        datas.addAll(FileUtils.ReadFields(f1, "F1", datasf1, ",")); // Add all objects found
+        datas.addAll(FileUtils.FormatID(FileUtils.ReadFields(f2, "F2", datasaux, " ; "), IDF)); // Format id for f2                                                                          // format
+        datas.addAll(FileUtils.ReadFields(f1, "F1", datasaux, ",")); // Add all objects found
         fileUtils.setDatas(datas); // Set data in fileUtils
-        /*
-         * datasf2.forEach((data) -> {
-         * System.out.println(data.getName()+","+data.getCity());
-         * });
-         */
+        datas.forEach((data) -> {
+            System.out.println(data.getName());
+        });
 
         return fileUtils;
     }
+
 
     public boolean isFoundFormat() {
         return this.foundFormat;
@@ -205,7 +200,7 @@ public class FileUtils {
     }
 
     public void setFormat(String format) {
-        this.format = format;
+        this.format=format;
     }
 
     public String getFormat() {

@@ -32,15 +32,11 @@ public class SecondEx {
                                 System.err.println("No data");
                                 System.exit(0);
                             }
-                            ArrayList<String> personVisited = new ArrayList<String>();
                             for (int j = 0; j < fileUtils.getDatas().size(); j++) {
                                 if (fileUtils.getDatas().get(j).getCity().toUpperCase()
                                         .equals(nextKey.toUpperCase())) {
-                                    if (!personVisited.contains(fileUtils.getDatas().get(j).getId())) {
-                                        System.out.println(fileUtils.getDatas().get(j).getName() + ","
-                                                + fileUtils.getDatas().get(j).getId());
-                                        personVisited.add(fileUtils.getDatas().get(j).getId());
-                                    }
+                                    System.out.println(fileUtils.getDatas().get(j).getName() + ","
+                                            + fileUtils.getDatas().get(j).getId());
                                 }
                             }
                         } catch (FileNotFoundException e) {

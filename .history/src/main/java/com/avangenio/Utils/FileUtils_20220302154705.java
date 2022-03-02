@@ -20,28 +20,29 @@ public class FileUtils {
     String route, text, IDF, separator, format = "";
     List<Data> datas = new ArrayList<Data>();
 
+
     public FileUtils() {
 
     }
 
     public FileUtils(String route, String text, List<Data> datas, String IDF, String separator, String format) {
-        this.route = route;
-        this.text = text;
-        this.datas = datas;
-        this.IDF = IDF;
-        this.separator = separator;
-        this.format = format;
-
+        this.route=route;
+        this.text=text;
+        this.datas=datas;
+        this.IDF=IDF;
+        this.separator=separator;
+        this.format=format;
+    
     }
 
     public String ReadFile() throws FileNotFoundException {
         String file = "";
-        Scanner input = new Scanner(new File(route));
-        while (input.hasNextLine()) {
-            String line = input.nextLine();
-            file += line + "\n";
-        }
-        input.close();
+            Scanner input = new Scanner(new File(route));
+            while (input.hasNextLine()) {
+                String line = input.nextLine();
+                file += line + "\n";
+            }
+            input.close();
         return file;
     }
 
@@ -140,17 +141,16 @@ public class FileUtils {
         fileUtils.setFormat("F2");
         f2 = fileUtils.ReadBlock(); // Read in format f2
         datasf2 = FileUtils.ReadFields(f2, "F2", datasf2, " ; ");
-        datas.addAll(FileUtils.FormatID(datasf2, IDF)); // Format id for f2 // format
+        datas.addAll(FileUtils.FormatID(datasf2, IDF)); // Format id for f2                                                                          // format
         datas.addAll(FileUtils.ReadFields(f1, "F1", datasf1, ",")); // Add all objects found
         fileUtils.setDatas(datas); // Set data in fileUtils
-        /*
-         * datasf2.forEach((data) -> {
-         * System.out.println(data.getName()+","+data.getCity());
-         * });
-         */
+        datasf2.forEach((data) -> {
+            System.out.println(data.getName()+","+data.getCity());
+        });
 
         return fileUtils;
     }
+
 
     public boolean isFoundFormat() {
         return this.foundFormat;
@@ -205,7 +205,7 @@ public class FileUtils {
     }
 
     public void setFormat(String format) {
-        this.format = format;
+        this.format=format;
     }
 
     public String getFormat() {

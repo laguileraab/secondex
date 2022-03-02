@@ -13,9 +13,9 @@ public class SecondEx {
         String nextKey = "";
 
         for (int i = 0; i < args.length; i++) {
-            String key = args[i].trim();
+            String key = args[i];
             try {
-                nextKey = args[i + 1].trim();
+                nextKey = args[i + 1];
             } catch (Exception e) {
             }
             switch (key.toUpperCase()) {
@@ -32,15 +32,11 @@ public class SecondEx {
                                 System.err.println("No data");
                                 System.exit(0);
                             }
-                            ArrayList<String> personVisited = new ArrayList<String>();
                             for (int j = 0; j < fileUtils.getDatas().size(); j++) {
                                 if (fileUtils.getDatas().get(j).getCity().toUpperCase()
                                         .equals(nextKey.toUpperCase())) {
-                                    if (!personVisited.contains(fileUtils.getDatas().get(j).getId())) {
-                                        System.out.println(fileUtils.getDatas().get(j).getName() + ","
-                                                + fileUtils.getDatas().get(j).getId());
-                                        personVisited.add(fileUtils.getDatas().get(j).getId());
-                                    }
+                                    System.out.println(fileUtils.getDatas().get(j).getName() + ","
+                                            + fileUtils.getDatas().get(j).getId());
                                 }
                             }
                         } catch (FileNotFoundException e) {
@@ -64,9 +60,11 @@ public class SecondEx {
                             for (int j = 0; j < fileUtils.getDatas().size(); j++) {
                                 if (fileUtils.getDatas().get(j).getId().toUpperCase()
                                         .equals(nextKey.toUpperCase())) {
-                                    if (!citiesVisited.contains(fileUtils.getDatas().get(j).getCity())) {
+                                    if (!citiesVisited.contains(nextKey.toUpperCase())) {
+                                        System.out.println(nextKey.toUpperCase());
                                         System.out.println(fileUtils.getDatas().get(j).getCity());
-                                        citiesVisited.add(fileUtils.getDatas().get(j).getCity());
+                                        citiesVisited.add(fileUtils.getDatas().get(j).getCity().toUpperCase());
+                                        System.out.println(citiesVisited.get(0));
                                     }
                                 }
                             }
@@ -91,9 +89,9 @@ public class SecondEx {
                             for (int j = 0; j < fileUtils.getDatas().size(); j++) {
                                 if (fileUtils.getDatas().get(j).getName().toUpperCase()
                                         .equals(nextKey.toUpperCase())) {
-                                    if (!citiesVisited.contains(fileUtils.getDatas().get(j).getCity())) {
+                                    if (!citiesVisited.contains(nextKey.toUpperCase())) {
                                         System.out.println(fileUtils.getDatas().get(j).getCity());
-                                        citiesVisited.add(fileUtils.getDatas().get(j).getCity());
+                                        citiesVisited.add(fileUtils.getDatas().get(j).getCity().toUpperCase());
                                     }
                                 }
                             }
