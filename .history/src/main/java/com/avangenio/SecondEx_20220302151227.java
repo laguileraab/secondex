@@ -34,6 +34,7 @@ public class SecondEx {
                                 System.err.println("No data");
                                 System.exit(0);
                             }
+                            List<Data> dataShow = new ArrayList<Data>();
                             for (int j = 0; j < fileUtils.getDatas().size(); j++) {
                                 if (fileUtils.getDatas().get(j).getCity().toUpperCase()
                                         .equals(nextKey.toUpperCase())) {
