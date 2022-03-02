@@ -32,11 +32,9 @@ public class SecondEx {
 
     @PostConstruct
     public void init() {
-        if(args.length>0){
         System.out.println("########################################");
         System.out.println("####### Program start here #############");
         System.out.println("########################################");
-        }
         String filter = "";
 
         String text = "";
@@ -62,10 +60,10 @@ public class SecondEx {
                     System.out.println(dataService.getDataByCity(nextKey));
                     break;
                 case "ID":
-                    System.out.println(dataService.getDataById(nextKey));
+                System.out.println(dataService.getDataById(nextKey));
                     break;
-                case "NAME":
-                    System.out.println(dataService.getDataByName(nextKey));
+                    case "NAME":
+                System.out.println(dataService.getDataByName(nextKey));
                     break;
                 default:
                     text = FileUtils.ReadFile(key);
@@ -75,7 +73,6 @@ public class SecondEx {
                     datas = FileUtils.FormatID(datas, "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[A-Z]");
                     datas.addAll(FileUtils.ReadFields(f1, "F1", datas, ","));
                     dataService.saveOrUpdateAll(datas);
-                    System.out.println("####### Information added from "+key+" #############");
                     break;
             }
         }

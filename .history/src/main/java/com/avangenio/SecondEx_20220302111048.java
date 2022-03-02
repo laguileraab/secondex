@@ -31,7 +31,7 @@ public class SecondEx {
     }
 
     @PostConstruct
-    public void init() {
+    public void init() 
         if(args.length>0){
         System.out.println("########################################");
         System.out.println("####### Program start here #############");
@@ -75,7 +75,6 @@ public class SecondEx {
                     datas = FileUtils.FormatID(datas, "[0-9][0-9][0-9][0-9][0-9][0-9][0-9][0-9]-[A-Z]");
                     datas.addAll(FileUtils.ReadFields(f1, "F1", datas, ","));
                     dataService.saveOrUpdateAll(datas);
-                    System.out.println("####### Information added from "+key+" #############");
                     break;
             }
         }
