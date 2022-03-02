@@ -1,0 +1,69 @@
+package com.avangenio;
+
+import java.io.FileNotFoundException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import com.avangenio.Utils.FileUtils;
+
+public class SecondEx {
+
+    public static void main(String[] args) {
+        FileUtils fileUtils = new FileUtils();
+        String nextKey = "";
+
+        for (int i = 0; i < args.length; i++) {
+            String key = args[i];
+            try {
+                nextKey = args[i + 1];
+            } catch (Exception e) {
+            }
+            switch (key.toUpperCase()) {
+                case "CITY":
+                    if (FileUtils.DataisEmpty()) {
+                        System.err.println("No data");
+                        System.exit(0);
+                    } else {
+                        try {
+                            if (args.length == 2)
+                                fileUtils = fetchData(fileUtils, "data.tmp");
+
+                            if (fileUtils.getDatas().isEmpty()) {
+                                System.err.println("No data");
+                                System.exit(0);
+                            }
+                            List<Data> dataShow = new ArrayList<Data>();
+                            for (int j = 0; j < fileUtils.getDatas().size(); j++) {
+                                if (fileUtils.getDatas().get(j).getCity().toUpperCase()
+                                        .equals(nextKey.toUpperCase())) {
+                                    if (dataShow.isEmpty() | dataShow.contains(fileUtils.getDatas().get(j))) {
+                                        System.out.println(fileUtils.getDatas().get(j).getName() + ","
+                                                + fileUtils.getDatas().get(j).getId());
+                                        dataShow.add(fileUtils.getDatas().get(j));
+                                    }
+                                }
+                            }
+                        } catch (FileNotFoundException e) {
+                        }
+                    }
+                    break;
+                default:
+                    if (i == 0) {
+                        try {
+                            FileUtils.WriteFile(key);
+                            fileUtils = fetchData(fileUtils, key);
+                            if (fileUtils.getDatas().isEmpty()) {
+                                System.err.println("No data");
+                                System.exit(0);
+                            }
+                        } catch (FileNotFoundException e) {
+                        }
+                    }
+                    break;
+            }
+        }
+
+    }
+}
